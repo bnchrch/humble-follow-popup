@@ -1,22 +1,20 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import Modal from 'react-modal'
+// import styles from './styles.css'
 
-import styles from './styles.css'
+const HumbleFollowModal = ({modalIsOpen, closeModal, afterOpenModal, customStyles, title}) => {
+  return (
+    <Modal
+      isOpen={modalIsOpen}
+      onAfterOpen={afterOpenModal}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel='Example Modal'
+    >
 
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
+      <h2>{title}</h2>
+      <button onClick={closeModal}>Close</button>
+    </Modal>)
 }
+
+export {HumbleFollowModal}

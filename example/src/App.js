@@ -10,7 +10,7 @@ Hey, thanks so much for reading!
 
 My goal to 2020 is to simply make other developers lives easier. This goal is directly affected by how many people know about what I'm doing.
 
-So if you enjoyed the content so far I would be thrilled if you followed me somewhere, anywhere.
+So if you enjoyed the content so far **I would be thrilled if you followed me somewhere, anywhere**.
 
 Don't worry though! This is not a shakedown! You can close this pop up. No penalty. and I wont ask again.
 

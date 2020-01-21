@@ -1,14 +1,15 @@
 import React from 'react'
 import Modal from 'react-modal'
 import styles from './styles.css'
-import map from 'lodash/fp/map';
-const mapWithKey = map.convert({cap: false});
+import map from 'lodash/fp/map'
+import Markdown from 'markdown-to-jsx'
+const mapWithKey = map.convert({cap: false})
 
 const Title = ({children}) => <div className={styles.titleContainer}>{children}</div>
 
 const Message = ({messageText, closeModal, closeText}) => (
   <div className={styles.messageContainer}>
-    <div className={styles.messageBody}>{messageText}</div>
+    <div className={styles.messageBody}><Markdown>{messageText}</Markdown></div>
     <button className={styles.messageButton} onClick={closeModal}>{closeText}</button>
   </div>
 )

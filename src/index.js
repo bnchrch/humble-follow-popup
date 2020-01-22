@@ -103,12 +103,10 @@ TODO
 - fix up this silly svg import
 */
 
-const CloseIcon = ({close}) => <div onClick={close}><CloseIconSVG /></div>
 
-const Header = ({title, closeModal}) => (
+const Header = ({title}) => (
   <div className={styles.headerContainer}>
     <Title>{title}</Title>
-    <CloseIcon close={closeModal} />
   </div>
 )
 
@@ -133,7 +131,7 @@ const HumbleFollowModal = ({
       classNames={CLASSES}
       closeIconSvgPath={<CloseIconSVG />}
     >
-      <Header title={title} closeModal={closeModal} />
+      <Header title={title} />
       <div className={styles.body}>
         <Message messageText={messageText} closeModal={closeModal} closeText={closeText} />
         <SocialMediaCTAs socialAccounts={socialAccounts} />

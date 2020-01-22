@@ -47,14 +47,16 @@ TODO
 - add a bunch of sites
 - create a scrollable open
 - create a click open
+- remove css modules
+- find an auto css prefixer
+- fix up this silly svg import
 */
 
-const CloseIcon = ({close}) => <div onClick={close}>x</div>
+// const CloseIcon = ({close}) => <div onClick={close}><Clo</div>
 
 const Header = ({title, closeModal}) => (
   <div className={styles.headerContainer}>
     <Title>{title}</Title>
-    <CloseIcon close={closeModal} />
   </div>
 )
 
@@ -77,6 +79,14 @@ const HumbleFollowModal = ({
       open={modalIsOpen}
       onClose={closeModal}
       classNames={CLASSES}
+      closeIconSvgPath={
+        <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 28L26 2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 2L29 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+      }
+
     >
       <Header title={title} closeModal={closeModal} />
       <div className={styles.body}>

@@ -8,6 +8,8 @@ import getOr from 'lodash/fp/getOr'
 import Markdown from 'markdown-to-jsx'
 import compose from 'recompose/compose'
 import lifecycle from 'recompose/lifecycle'
+import withState from 'recompose/withState'
+import withProps from 'recompose/withProps'
 // SVGS
 
 const CloseIconSVG = () => <svg width='31' height='30' viewBox='0 0 31 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -146,7 +148,14 @@ const HumbleFollowModal = ({
     </Modal>)
 }
 
-const ScrollTriggerPure = () => <div>hi</div>
+const withModalState = compose(
+  withState('modalIsOpen', 'setModalOpen', true),
+  withProps(({setModalOpen}) => ({
+    closeModal: () => setModalOpen(false),
+    openModal: () => setModalOpen(true)
+  }))
+)
+
 const getDocHeight = () => Math.max(
   document.body.scrollHeight, document.documentElement.scrollHeight,
   document.body.offsetHeight, document.documentElement.offsetHeight,
@@ -162,15 +171,19 @@ const getScrollPosition = (el) => {
   const scrollPostion = Math.floor(scrollTop / totalDocScrollLength * 100)
   return scrollPostion
 }
-const ScrollTrigger = compose(
+const HumbleFollowScroll = compose(
+  withModalState,
+  withState('seenModal', 'setSeenModal', false),
   lifecycle({
     componentDidMount() {
       document.addEventListener('scroll', () => {
-        const scrollPostion = getScrollPosition(window)
-        console.log(`Scroll: ${scrollPostion}%`)
+        const scrollPosition = getScrollPosition(window)
+        if (scrollPosition >= this.props.scrollPerecentageTrigger) {
+          this.props.openModal()
+        }
       })
     }
   })
-)(ScrollTriggerPure)
+)(HumbleFollowModal)
 
-export {HumbleFollowModal, ScrollTrigger}
+export {HumbleFollowModal, HumbleFollowScroll}

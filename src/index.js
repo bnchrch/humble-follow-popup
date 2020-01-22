@@ -6,14 +6,6 @@ import Markdown from 'markdown-to-jsx'
 // import CloseIconSVG from './assets/close.svg'
 const mapWithKey = map.convert({cap: false})
 
-// const MODAL_STYLES = {
-//   content: {
-//     background: '#0F2439',
-//     color: '#FFFFFF',
-//     padding: '2.5rem'
-//   }
-// }
-
 const Title = ({children}) => <div className={styles.titleContainer}>{children}</div>
 
 const Message = ({messageText, closeModal, closeText}) => (
@@ -41,11 +33,10 @@ const SocialMediaCTAs = ({socialAccounts}) => {
   )
 }
 
-const CloseIconSVG = () => <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M2 28L26 2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5 2L29 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+const CloseIconSVG = () => <svg width='31' height='30' viewBox='0 0 31 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <path d='M2 28L26 2' stroke='white' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round' />
+  <path d='M5 2L29 28' stroke='white' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round' />
 </svg>
-
 
 /*
 TODO
@@ -70,7 +61,7 @@ const Header = ({title, closeModal}) => (
 )
 
 const CLASSES = {
-  modal: 'modalContent',
+  modal: 'modalContent'
 }
 
 const HumbleFollowModal = ({
@@ -92,10 +83,9 @@ const HumbleFollowModal = ({
     >
       <Header title={title} closeModal={closeModal} />
       <div className={styles.body}>
-        <Message messageText={messageText} closeModal={closeModal} closeText={closeText}/>
+        <Message messageText={messageText} closeModal={closeModal} closeText={closeText} />
         <SocialMediaCTAs socialAccounts={socialAccounts} />
       </div>
-
     </Modal>)
 }
 

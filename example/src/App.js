@@ -3,7 +3,7 @@ import compose from 'recompose/compose';
 import withState from 'recompose/withState';
 import withProps from 'recompose/withProps';
 
-import {HumbleFollowModal, HumbleFollowScroll} from 'humble-follow-popup';
+import {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick} from 'humble-follow-popup';
 
 const MESSAGE_TEXT = `
 Hey, thanks so much for reading!
@@ -44,13 +44,19 @@ const BASE_MODAL_PROPS = {
 const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
   return (
     <div style={{height: '6000px'}}>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick={openModal}>Open Modal with custom state</button>
       <HumbleFollowModal
         {...BASE_MODAL_PROPS}
         closeModal={closeModal}
         openModal={openModal}
         modalIsOpen={modalIsOpen}
+      />
 
+      <button id='humbleButton'>Open Modal with managed state</button>
+
+      <HumbleFollowClick
+        {...BASE_MODAL_PROPS}
+        buttonId='humbleButton'
       />
 
       <HumbleFollowScroll

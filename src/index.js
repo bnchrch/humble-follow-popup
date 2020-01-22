@@ -173,7 +173,6 @@ const getScrollPosition = (el) => {
 }
 const HumbleFollowScroll = compose(
   withModalState,
-  withState('seenModal', 'setSeenModal', false),
   lifecycle({
     componentDidMount() {
       document.addEventListener('scroll', () => {
@@ -186,4 +185,17 @@ const HumbleFollowScroll = compose(
   })
 )(HumbleFollowModal)
 
-export {HumbleFollowModal, HumbleFollowScroll}
+const HumbleFollowClick = compose(
+  withModalState,
+  lifecycle({
+    componentDidMount() {
+      document
+        .getElementById(this.props.buttonId)
+        .addEventListener('click', () => {
+          this.props.openModal()
+        })
+    }
+  })
+)(HumbleFollowModal)
+
+export {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick}

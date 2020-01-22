@@ -80,6 +80,15 @@
   color: inherit;
 }
 
+.socialIcon {
+  display: flex;
+  width: 2rem;
+  align-items: center;
+}
+
+.socialText {
+}
+
 .socialCTAColumn {
   flex: 2;
   display: flex;

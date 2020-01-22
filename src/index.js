@@ -63,7 +63,11 @@ const Message = ({messageText, closeModal, closeText}) => (
 
 const SocialMediaCTA = ({text, url, color, fontColor, IconComponent}) => {
   const style = {backgroundColor: color, color: fontColor}
-  return (<div className={styles.socialMediaCTAContainer} style={style}><IconComponent /><a href={url}>{text}</a></div>)
+  return (
+    <div className={styles.socialMediaCTAContainer} style={style}>
+      <div className={styles.socialIcon}><IconComponent /></div>
+      <a className={styles.socialText} href={url}>{text}</a>
+    </div>)
 }
 
 const SocialMediaCTAs = ({socialAccounts}) => {
@@ -92,7 +96,7 @@ const SocialMediaCTAs = ({socialAccounts}) => {
 
 /*
 TODO
-- change all svgs to components
+- change all svgs to icons
 - ensure that the css is prefixed but not uniqified
 - update styles
 - add a bunch of sites
@@ -101,8 +105,9 @@ TODO
 - remove css modules
 - find an auto css prefixer
 - fix up this silly svg import
+- add darkmode
+- add ability to define your own
 */
-
 
 const Header = ({title}) => (
   <div className={styles.headerContainer}>

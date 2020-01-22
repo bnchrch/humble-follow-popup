@@ -34,17 +34,39 @@ const SOCIAL_ACCOUNTS = [
     icon: MediumIconSVG
   }
 ]
-
 const BASE_MODAL_PROPS = {
   title: '👋 One humble request from an Indie Dev',
   closeText: 'Thanks, but no thanks',
   messageText: MESSAGE_TEXT,
   socialAccounts: SOCIAL_ACCOUNTS
 }
+
+const SCROLL_TRIGGER = 80
+
 const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
+  const pageStyle = {
+    height: '6000px',
+    display: 'flex',
+    padding: '2rem',
+    flexDirection: 'column',
+    background: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,186,255,1) 22%, rgba(155,129,255,1) 100%)'
+  }
+
+  const buttonStyle = {
+    alignSelf: 'flex-start',
+    background: 'none',
+    border: '1px solid rgba(155,129,255,1)',
+    borderRadius: '6px',
+    color: 'rgba(155,129,255,1)',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    padding: '0.5rem 1rem',
+    margin: '0.5rem 2rem',
+    transition: '200ms'
+  }
   return (
-    <div style={{height: '6000px'}}>
-      <button onClick={openModal}>Open Modal with custom state</button>
+    <div style={pageStyle}>
+      <button onClick={openModal} style={buttonStyle}>Open Modal with custom state</button>
       <HumbleFollowModal
         {...BASE_MODAL_PROPS}
         closeModal={closeModal}
@@ -52,17 +74,20 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
         modalIsOpen={modalIsOpen}
       />
 
-      <button id='humbleButton'>Open Modal with managed state</button>
+      <button id='humbleButton' style={buttonStyle}>Open Modal with managed state</button>
 
       <HumbleFollowClick
         {...BASE_MODAL_PROPS}
         buttonId='humbleButton'
       />
 
+      <h1>Scroll {SCROLL_TRIGGER}% of the way 👇 to trigger the modal</h1>
+      <h3><i>Note: The modal will only open once, after that you must clear your cookies to see it again.</i></h3>
+
       <HumbleFollowScroll
         {...BASE_MODAL_PROPS}
         scrollPerecentageTrigger={80}
-        debounce={1000}
+        debounce={200}
       />
     </div>
   )

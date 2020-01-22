@@ -1,6 +1,10 @@
-.modalContent {
+
+:global(.modalContent) {
   display: flex;
   flex-direction: column;
+  background: #0F2439;
+  color: #FFFFFF;
+  padding: 2.5rem;
 }
 
 .headerContainer {

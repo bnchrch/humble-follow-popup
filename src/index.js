@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from 'react-modal'
+import Modal from 'react-responsive-modal'
 import styles from './styles.css'
 import map from 'lodash/fp/map'
 import Markdown from 'markdown-to-jsx'
@@ -58,10 +58,14 @@ const Header = ({title, closeModal}) => (
   </div>
 )
 
+const CLASSES = {
+  modal: 'modalContent',
+}
+
 const HumbleFollowModal = ({
   modalIsOpen,
   closeModal,
-  afterOpenModal,
+  // afterOpenModal,
   // customStyles,
   title,
   messageText,
@@ -70,18 +74,14 @@ const HumbleFollowModal = ({
 }) => {
   return (
     <Modal
-      isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
-      onRequestClose={closeModal}
-      style={MODAL_STYLES}
-      contentLabel={title}
+      open={modalIsOpen}
+      onClose={closeModal}
+      classNames={CLASSES}
     >
-      <div className={styles.modalContent}>
-        <Header title={title} closeModal={closeModal} />
-        <div className={styles.body}>
-          <Message messageText={messageText} closeModal={closeModal} closeText={closeText}/>
-          <SocialMediaCTAs socialAccounts={socialAccounts} />
-        </div>
+      <Header title={title} closeModal={closeModal} />
+      <div className={styles.body}>
+        <Message messageText={messageText} closeModal={closeModal} closeText={closeText}/>
+        <SocialMediaCTAs socialAccounts={socialAccounts} />
       </div>
 
     </Modal>)

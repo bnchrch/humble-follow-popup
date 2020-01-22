@@ -5,6 +5,14 @@ import map from 'lodash/fp/map'
 import Markdown from 'markdown-to-jsx'
 const mapWithKey = map.convert({cap: false})
 
+const MODAL_STYLES = {
+  content: {
+    background: '#0F2439',
+    color: '#FFFFFF',
+    padding: '2.5rem'
+  }
+}
+
 const Title = ({children}) => <div className={styles.titleContainer}>{children}</div>
 
 const Message = ({messageText, closeModal, closeText}) => (
@@ -20,7 +28,6 @@ const SocialMediaCTA = ({service, url}) => {
 }
 
 const SocialMediaCTAs = ({socialAccounts}) => {
-  // alert(JSON.stringify(socialAccounts))
   return (
     <div className={styles.socialCTAColumn}>
       {
@@ -33,11 +40,29 @@ const SocialMediaCTAs = ({socialAccounts}) => {
   )
 }
 
+/*
+TODO
+- ensure that the css is prefixed but not uniqified
+- update styles
+- add a bunch of sites
+- create a scrollable open
+- create a click open
+*/
+
+const CloseIcon = ({close}) => <div onClick={close}>x</div>
+
+const Header = ({title, closeModal}) => (
+  <div className={styles.headerContainer}>
+    <Title>{title}</Title>
+    <CloseIcon close={closeModal} />
+  </div>
+)
+
 const HumbleFollowModal = ({
   modalIsOpen,
   closeModal,
   afterOpenModal,
-  customStyles,
+  // customStyles,
   title,
   messageText,
   socialAccounts,
@@ -48,16 +73,17 @@ const HumbleFollowModal = ({
       isOpen={modalIsOpen}
       onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
-      style={customStyles}
+      style={MODAL_STYLES}
       contentLabel={title}
     >
-
-      <Title>{title}</Title>
-      <div className={styles.body}>
-        <Message messageText={messageText} closeModal={closeModal} closeText={closeText}/>
-        <SocialMediaCTAs socialAccounts={socialAccounts} />
+      <div className={styles.modalContent}>
+        <Header title={title} closeModal={closeModal} />
+        <div className={styles.body}>
+          <Message messageText={messageText} closeModal={closeModal} closeText={closeText}/>
+          <SocialMediaCTAs socialAccounts={socialAccounts} />
+        </div>
       </div>
-      <button onClick={closeModal}>Close</button>
+
     </Modal>)
 }
 

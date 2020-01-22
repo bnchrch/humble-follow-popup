@@ -1,8 +1,64 @@
-/* add css styles here (optional) */
-
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+.modalContent {
+  display: flex;
+  flex-direction: column;
 }
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.titleContainer {
+  display: flex;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  padding: 0.5rem 2rem;
+}
+
+.messageBody {
+  display: flex;
+  font-size: 1rem;
+}
+
+.messageBody > a {
+  text-decoration: underline;
+  color: white;
+}
+
+.messageBody a:visited {
+  text-decoration: underline;
+  color: white;
+}
+
+.messageButton {
+  display: flex;
+
+}
+
+.socialMediaCTAContainer {
+  display: flex;
+  background-color: 'white';
+}
+
+.socialCTAColumn {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+
+

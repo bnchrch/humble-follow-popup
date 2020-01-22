@@ -2,6 +2,8 @@ import React from 'react'
 import Modal from 'react-responsive-modal'
 import styles from './styles.css'
 import map from 'lodash/fp/map'
+import flow from 'lodash/fp/flow'
+import filter from 'lodash/fp/filter'
 import getOr from 'lodash/fp/getOr'
 import Markdown from 'markdown-to-jsx'
 // import CloseIconSVG from './assets/close.svg'
@@ -70,29 +72,33 @@ const SocialMediaCTA = ({text, url, color, fontColor, IconComponent}) => {
     </div>)
 }
 
-const SocialMediaCTAs = ({socialAccounts}) => {
-  return (
-    <div className={styles.socialCTAColumn}>
-      {
-        mapWithKey(
-          (value, key) => {
-            const {text, color, fontColor, icon} = getOr({}, key, SOCIAL_MEDIA_BADGES)
-            return text &&
-              <SocialMediaCTA
-                key={key}
-                text={text}
-                url={value}
-                color={color}
-                fontColor={fontColor}
-                IconComponent={icon}
-              />
-          },
-          socialAccounts
-        )
-      }
-    </div>
-  )
+const renderSocialMediaCTA = ({text, color, fontColor, icon, url}) => (text &&
+  <SocialMediaCTA
+    key={url}
+    text={text}
+    url={url}
+    color={color}
+    fontColor={fontColor}
+    IconComponent={icon}
+  />)
+
+const handleSocialServicePresets = (object) => {
+  const {service} = object
+  return service
+    ? SOCIAL_MEDIA_BADGES[service]
+    : object
 }
+
+const SocialMediaCTAs = ({socialAccounts}) => (
+  <div className={styles.socialCTAColumn}>
+    {
+      flow(
+        map(handleSocialServicePresets),
+        filter(Boolean),
+        map(renderSocialMediaCTA)
+      )(socialAccounts)
+    }
+  </div>)
 
 /*
 TODO
@@ -122,8 +128,6 @@ const CLASSES = {
 const HumbleFollowModal = ({
   modalIsOpen,
   closeModal,
-  // afterOpenModal,
-  // customStyles,
   title,
   messageText,
   socialAccounts,

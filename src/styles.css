@@ -62,13 +62,28 @@
 .socialMediaCTAContainer {
   display: flex;
   background-color: 'white';
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 4em;
+  align-items: center;
+}
+
+.socialMediaCTAContainer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.socialMediaCTAContainer a:visited {
+  text-decoration: none;
+  color: inherit;
 }
 
 .socialCTAColumn {
   flex: 2;
   display: flex;
   flex-direction: column;
-  margin-top: 1em;
+  padding: 2rem
 }
 
 

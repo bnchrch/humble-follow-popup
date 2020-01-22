@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import compose from 'recompose/compose';
 import withState from 'recompose/withState';
 import withProps from 'recompose/withProps';
+import Cookies from 'universal-cookie'
 
 import {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick} from 'humble-follow-popup';
+const cookies = new Cookies()
 
 const MESSAGE_TEXT = `
 Hey, thanks so much for reading!
@@ -41,7 +43,24 @@ const BASE_MODAL_PROPS = {
   socialAccounts: SOCIAL_ACCOUNTS
 }
 
-const SCROLL_TRIGGER = 80
+const SCROLL_TRIGGER = 50
+
+const DEFAULT_BUTTON_STYLE = {
+  alignSelf: 'flex-start',
+  background: 'none',
+  border: '1px solid rgba(155,129,255,1)',
+  borderRadius: '6px',
+  color: 'rgba(155,129,255,1)',
+  fontWeight: 'bold',
+  fontSize: '1rem',
+  padding: '0.5rem 1rem',
+  margin: '0.5rem 0',
+  transition: '200ms'
+};
+
+const Button = ({children, ...props}) => {
+  return (<button style={DEFAULT_BUTTON_STYLE} {...props}>{children}</button>)
+}
 
 const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
   const pageStyle = {
@@ -52,21 +71,10 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
     background: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,186,255,1) 22%, rgba(155,129,255,1) 100%)'
   }
 
-  const buttonStyle = {
-    alignSelf: 'flex-start',
-    background: 'none',
-    border: '1px solid rgba(155,129,255,1)',
-    borderRadius: '6px',
-    color: 'rgba(155,129,255,1)',
-    fontWeight: 'bold',
-    fontSize: '1rem',
-    padding: '0.5rem 1rem',
-    margin: '0.5rem 2rem',
-    transition: '200ms'
-  }
+
   return (
     <div style={pageStyle}>
-      <button onClick={openModal} style={buttonStyle}>Open Modal with custom state</button>
+      <Button onClick={openModal}>Open Modal with custom state</Button>
       <HumbleFollowModal
         {...BASE_MODAL_PROPS}
         closeModal={closeModal}
@@ -74,19 +82,28 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
         modalIsOpen={modalIsOpen}
       />
 
-      <button id='humbleButton' style={buttonStyle}>Open Modal with managed state</button>
+      <Button id='humbleButton'>Open Modal with managed state</Button>
 
       <HumbleFollowClick
         {...BASE_MODAL_PROPS}
         buttonId='humbleButton'
       />
 
-      <h1>Scroll {SCROLL_TRIGGER}% of the way 👇 to trigger the modal</h1>
-      <h3><i>Note: The modal will only open once, after that you must clear your cookies to see it again.</i></h3>
-
+      <h2>Or scroll {SCROLL_TRIGGER}% of the way 👇 the page to trigger the modal</h2>
+      <div><i>Note: The modal will only open once, after that you must clear your 🍪's to see it again.</i></div>
+      <Button
+        style={{
+          ...DEFAULT_BUTTON_STYLE,
+          fontSize: '0.5rem',
+          padding: '0.25rem 0.5rem',
+          fontWeight: 'normal',
+        }}
+        onClick={() => cookies.remove('HasSeenHumbleModal')}
+      >
+      Clear cookies</Button>
       <HumbleFollowScroll
         {...BASE_MODAL_PROPS}
-        scrollPerecentageTrigger={80}
+        scrollPerecentageTrigger={SCROLL_TRIGGER}
         debounce={200}
       />
     </div>

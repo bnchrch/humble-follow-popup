@@ -1,20 +1,23 @@
 import React from 'react'
 import Modal from 'react-responsive-modal'
-import styles from './styles.css'
-import map from 'lodash/fp/map'
+
 import flow from 'lodash/fp/flow'
+import map from 'lodash/fp/map'
 import filter from 'lodash/fp/filter'
 import getOr from 'lodash/fp/getOr'
 import debounce from 'lodash/fp/debounce'
-import Markdown from 'markdown-to-jsx'
+
 import compose from 'recompose/compose'
 import lifecycle from 'recompose/lifecycle'
 import withState from 'recompose/withState'
 import withProps from 'recompose/withProps'
-import Cookies from 'universal-cookie';
 
-const cookies = new Cookies();
+import Cookies from 'universal-cookie'
+import Markdown from 'markdown-to-jsx'
 
+import styles from './styles.css'
+
+const cookies = new Cookies()
 
 const CloseIconSVG = () => <svg width='31' height='30' viewBox='0 0 31 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
   <path d='M2 28L26 2' stroke='white' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round' />
@@ -106,15 +109,9 @@ const SocialMediaCTAs = ({socialAccounts}) => (
 
 /*
 TODO
-- change all svgs to icons
 - ensure that the css is prefixed but not uniqified
-- update styles
-- add a bunch of sites
-- create a scrollable open
-- create a click open
 - remove css modules
 - find an auto css prefixer
-- fix up this silly svg import
 */
 
 const Header = ({title}) => (
@@ -221,5 +218,8 @@ const HumbleFollowClick = compose(
     }
   })
 )(HumbleFollowModal)
+
+// todo create a time based one
+// todo switch on options
 
 export {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick}

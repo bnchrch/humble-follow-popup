@@ -5,12 +5,16 @@ import map from 'lodash/fp/map'
 import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
 import getOr from 'lodash/fp/getOr'
+import debounce from 'lodash/fp/debounce'
 import Markdown from 'markdown-to-jsx'
 import compose from 'recompose/compose'
 import lifecycle from 'recompose/lifecycle'
 import withState from 'recompose/withState'
 import withProps from 'recompose/withProps'
-// SVGS
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const CloseIconSVG = () => <svg width='31' height='30' viewBox='0 0 31 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
   <path d='M2 28L26 2' stroke='white' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round' />
@@ -149,7 +153,7 @@ const HumbleFollowModal = ({
 }
 
 const withModalState = compose(
-  withState('modalIsOpen', 'setModalOpen', true),
+  withState('modalIsOpen', 'setModalOpen', false),
   withProps(({setModalOpen}) => ({
     closeModal: () => setModalOpen(false),
     openModal: () => setModalOpen(true)
@@ -171,16 +175,36 @@ const getScrollPosition = (el) => {
   const scrollPostion = Math.floor(scrollTop / totalDocScrollLength * 100)
   return scrollPostion
 }
+
+const withCookieDisable = withProps(({openModal}) => ({
+  openModal: () => {
+    const cookieId = 'HasSeenHumbleModal'
+    const hasSeenHumbleModal = cookies.get(cookieId)
+
+    if (!hasSeenHumbleModal) {
+      cookies.set(cookieId, true, { path: '/' })
+      openModal()
+    }
+  }
+}))
+
 const HumbleFollowScroll = compose(
   withModalState,
+  withCookieDisable,
   lifecycle({
     componentDidMount() {
-      document.addEventListener('scroll', () => {
-        const scrollPosition = getScrollPosition(window)
-        if (scrollPosition >= this.props.scrollPerecentageTrigger) {
-          this.props.openModal()
-        }
-      })
+      const debounceWindow = this.props.debouce || 500
+      const scrollPerecentageTrigger = this.props.scrollPerecentageTrigger || 80
+      document.addEventListener(
+        'scroll',
+        debounce(
+          debounceWindow,
+          () => {
+            const scrollPosition = getScrollPosition(window)
+            if (scrollPosition >= scrollPerecentageTrigger) {
+              this.props.openModal()
+            }
+          }))
     }
   })
 )(HumbleFollowModal)

@@ -62,13 +62,14 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
       <HumbleFollowScroll
         {...BASE_MODAL_PROPS}
         scrollPerecentageTrigger={80}
+        debounce={1000}
       />
     </div>
   )
 }
 
 const withModalState = compose(
-  withState('modalIsOpen', 'setModalOpen', true),
+  withState('modalIsOpen', 'setModalOpen', false),
   withProps(({setModalOpen}) => ({
     closeModal: () => setModalOpen(false),
     openModal: () => setModalOpen(true)

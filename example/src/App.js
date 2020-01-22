@@ -3,7 +3,7 @@ import compose from 'recompose/compose';
 import withState from 'recompose/withState';
 import withProps from 'recompose/withProps';
 
-import {HumbleFollowModal} from 'humble-follow-popup';
+import {HumbleFollowModal, ScrollTrigger} from 'humble-follow-popup';
 
 const MESSAGE_TEXT = `
 Hey, thanks so much for reading!
@@ -38,7 +38,7 @@ const SOCIAL_ACCOUNTS = [
 
 const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
   return (
-    <div>
+    <div id='test' style={{height: '6000px'}}>
       <button onClick={openModal}>Open Modal</button>
       <HumbleFollowModal
         closeModal={closeModal}
@@ -49,6 +49,7 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
         messageText={MESSAGE_TEXT}
         socialAccounts={SOCIAL_ACCOUNTS}
       />
+      <ScrollTrigger scrollContainerId='test'/>
     </div>
   )
 }

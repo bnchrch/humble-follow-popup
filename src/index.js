@@ -6,9 +6,8 @@ import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
 import getOr from 'lodash/fp/getOr'
 import Markdown from 'markdown-to-jsx'
-// import CloseIconSVG from './assets/close.svg'
-const mapWithKey = map.convert({cap: false})
-
+import compose from 'recompose/compose'
+import lifecycle from 'recompose/lifecycle'
 // SVGS
 
 const CloseIconSVG = () => <svg width='31' height='30' viewBox='0 0 31 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -84,7 +83,7 @@ const renderSocialMediaCTA = ({text, color, fontColor, icon, url}) => (text &&
 const handleSocialServicePresets = (object) => {
   const {service, url} = object
   return service
-    ? {...SOCIAL_MEDIA_BADGES[service], url}
+    ? {...getOr({}, service, SOCIAL_MEDIA_BADGES), url}
     : object
 }
 
@@ -110,8 +109,6 @@ TODO
 - remove css modules
 - find an auto css prefixer
 - fix up this silly svg import
-- add darkmode
-- add ability to define your own
 */
 
 const Header = ({title}) => (
@@ -149,4 +146,31 @@ const HumbleFollowModal = ({
     </Modal>)
 }
 
-export {HumbleFollowModal}
+const ScrollTriggerPure = () => <div>hi</div>
+const getDocHeight = () => Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+)
+
+const getScrollPosition = (el) => {
+  const scrollTop = el.pageYOffset
+  const windowHeight = el.innerHeight
+  const docHeight = getDocHeight()
+
+  const totalDocScrollLength = docHeight - windowHeight
+  const scrollPostion = Math.floor(scrollTop / totalDocScrollLength * 100)
+  return scrollPostion
+}
+const ScrollTrigger = compose(
+  lifecycle({
+    componentDidMount() {
+      document.addEventListener('scroll', () => {
+        const scrollPostion = getScrollPosition(window)
+        console.log(`Scroll: ${scrollPostion}%`)
+      })
+    }
+  })
+)(ScrollTriggerPure)
+
+export {HumbleFollowModal, ScrollTrigger}

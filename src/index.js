@@ -56,20 +56,19 @@ const SOCIAL_MEDIA_BADGES = {
 
 const Title = ({children}) => <div className={styles.titleContainer}>{children}</div>
 
-const Message = ({messageText, closeModal, closeText}) => (
+const Message = ({messageText}) => (
   <div className={styles.messageContainer}>
     <div className={styles.messageBody}><Markdown>{messageText}</Markdown></div>
-    <button className={styles.messageButton} onClick={closeModal}>{closeText}</button>
   </div>
 )
 
 const SocialMediaCTA = ({text, url, color, fontColor, IconComponent}) => {
   const style = {backgroundColor: color, color: fontColor}
   return (
-    <div className={styles.socialMediaCTAContainer} style={style}>
+    <a href={url} className={styles.socialMediaCTAContainer} style={style}>
       <div className={styles.socialIcon}><IconComponent /></div>
-      <a className={styles.socialText} href={url}>{text}</a>
-    </div>)
+      <div className={styles.socialText}>{text}</div>
+    </a>)
 }
 
 const renderSocialMediaCTA = ({text, color, fontColor, icon, url}) => (text &&
@@ -83,9 +82,9 @@ const renderSocialMediaCTA = ({text, color, fontColor, icon, url}) => (text &&
   />)
 
 const handleSocialServicePresets = (object) => {
-  const {service} = object
+  const {service, url} = object
   return service
-    ? SOCIAL_MEDIA_BADGES[service]
+    ? {...SOCIAL_MEDIA_BADGES[service], url}
     : object
 }
 
@@ -122,7 +121,8 @@ const Header = ({title}) => (
 )
 
 const CLASSES = {
-  modal: 'modalContent'
+  modal: 'modalContent',
+  closeButton: 'closeButton'
 }
 
 const HumbleFollowModal = ({
@@ -145,6 +145,7 @@ const HumbleFollowModal = ({
         <Message messageText={messageText} closeModal={closeModal} closeText={closeText} />
         <SocialMediaCTAs socialAccounts={socialAccounts} />
       </div>
+      <button className={styles.messageButton} onClick={closeModal}>{closeText}</button>
     </Modal>)
 }
 

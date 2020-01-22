@@ -1,11 +1,16 @@
+*:focus {
+  outline: none;
+}
+
 
 :global(.modalContent) {
   display: flex;
   flex-direction: column;
   background: #0F2439;
   color: #FFFFFF;
-  padding: 2.5rem;
+  padding: 3rem;
   font-family: 'Helvetica', sans-serif;
+  border-radius: 0.75rem;
 }
 
 .headerContainer {
@@ -57,7 +62,16 @@
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  margin-top: 1rem;
+  margin: 0.5rem 2rem;
+  transition: 200ms;
+
+}
+
+.messageButton:hover {
+  border: 1px solid #0F2439;
+  color: #0F2439;
+  background: white;
+  transform: scale(0.9);
 }
 
 .socialMediaCTAContainer {
@@ -68,9 +82,15 @@
   font-size: 1rem;
   border-radius: 4em;
   align-items: center;
+  transition: all ease 500ms;
+
 }
 
-.socialMediaCTAContainer > a {
+.socialMediaCTAContainer:hover {
+  transform: scale(1.1);
+}
+
+a.socialMediaCTAContainer {
   text-decoration: none;
   color: inherit;
 }
@@ -86,7 +106,14 @@
   align-items: center;
 }
 
-.socialText {
+:global(.closeButton) {
+  padding-top: 0.75rem;
+  padding-right: 0.75rem;
+  transition: 200ms;
+}
+
+.closeButton:hover {
+  transform: scale(0.9);
 }
 
 .socialCTAColumn {
@@ -96,5 +123,27 @@
   padding: 2rem
 }
 
+@media all and (max-width: 1024px) {
+  .body {
+    flex-direction: column;
+  }
 
+  .modalContent {
+    padding: 1rem;
+  }
+
+  .titleContainer {
+    font-size: 3.75vw;
+  }
+
+  .socialCTAColumn {
+    padding-top: 0
+  }
+
+  .closeButton {
+    padding-top: 0;
+    padding-right: 0;
+    width: 1rem;
+  }
+}
 

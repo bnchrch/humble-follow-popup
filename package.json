@@ -44,6 +44,7 @@
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
     "gh-pages": "^1.2.0",
+    "postcss-modules": "^1.5.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
@@ -63,6 +64,7 @@
     "markdown-to-jsx": "^6.10.3",
     "react-markdown": "^4.3.1",
     "react-responsive-modal": "^4.0.1",
+    "recompose": "^0.30.0",
     "universal-cookie": "^4.0.3"
   }
 }

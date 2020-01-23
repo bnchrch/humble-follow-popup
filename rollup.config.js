@@ -25,7 +25,10 @@ export default {
   plugins: [
     external(),
     postcss({
-      modules: true
+      modules: {
+        scopeBehaviour: 'local',
+        generateScopedName: 'HumbleFollow__[local]'
+      }
     }),
     url(),
     svgr(),

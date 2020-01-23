@@ -19,8 +19,8 @@ TODO
 */
 
 const CLASSES = {
-  modal: 'modalContent',
-  closeButton: 'closeButton'
+  modal: styles.modalContent,
+  closeButton: styles.closeButton
 }
 
 const HumbleFollowModal = ({
@@ -39,7 +39,7 @@ const HumbleFollowModal = ({
       closeIconSvgPath={<CloseIcon />}
     >
       <Header title={title} />
-      <div className={styles.body}>
+      <div className={styles.modalBody}>
         <Message messageText={messageText} closeModal={closeModal} closeText={closeText} />
         <SocialMediaCTAs socialAccounts={socialAccounts} />
       </div>

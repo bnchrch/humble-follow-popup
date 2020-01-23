@@ -2,8 +2,7 @@
   outline: none;
 }
 
-
-:global(.modalContent) {
+.modalContent {
   display: flex;
   flex-direction: column;
   background: #0F2439;
@@ -17,7 +16,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
 
 .titleContainer {
@@ -26,7 +24,7 @@
   font-size: 2rem;
 }
 
-.body {
+.modalBody {
   display: flex;
   flex-direction: row;
 }
@@ -64,7 +62,6 @@
   padding: 0.5rem 1rem;
   margin: 0.5rem 2rem;
   transition: 200ms;
-
 }
 
 .messageButton:hover {
@@ -83,7 +80,6 @@
   border-radius: 4em;
   align-items: center;
   transition: all ease 500ms;
-
 }
 
 .socialMediaCTAContainer:hover {
@@ -106,7 +102,7 @@ a.socialMediaCTAContainer {
   align-items: center;
 }
 
-:global(.closeButton) {
+.closeButton {
   padding-top: 0.75rem;
   padding-right: 0.75rem;
   transition: 200ms;

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+
+    <title>humble-follow-widget</title>
+  </head>
+
+  <body>
+    <div id="humbleButton">Click Me</div>
+    <script src="./dist/widget.js"></script>
+    <script>
+      const MESSAGE_TEXT = `
+        Hey, thanks so much for reading!
+
+        My goal to 2020 is to simply make other developers lives easier. This goal is directly affected by how many people know about what I'm doing.
+
+        So if you enjoyed the content so far I would be thrilled if you [followed me somewhere](https://www.producthunt.com/@bnchrch), anywhere.
+
+        Don't worry though! This is not a shakedown! You can close this pop up. No penalty. and I wont ask again.
+
+        Thanks again for reading and I'm always open to DM's so feel free to message me directly anytime.
+        `
+      const SOCIAL_ACCOUNTS = [
+        {service: 'productHunt', url: 'https://www.producthunt.com/@bnchrch'},
+        {service: 'twitter', url: 'https://twitter.com/bnchrch'},
+        {service: 'indieHackers', url: 'https://www.indiehackers.com/bnchrch/'}
+      ]
+      const MODAL_PROPS = {
+        title: '👋 One humble request from an Indie Dev',
+        closeText: 'Thanks, but no thanks',
+        messageText: MESSAGE_TEXT,
+        socialAccounts: SOCIAL_ACCOUNTS,
+        type: 'button',
+        buttonId: 'humbleButton'
+      }
+      window.HumbleFollow(MODAL_PROPS);
+    </script>
+  </body>
+</html>

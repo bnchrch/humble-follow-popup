@@ -2,10 +2,9 @@
   "name": "humble-follow-widget",
   "version": "1.0.0",
   "description": "A drop in widget to ask for follows",
-  "main": "index.js",
+  "main": "widget.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "build": "parcel build widget.js"
   },
   "author": "ben church",
   "license": "ISC",
@@ -14,13 +13,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "parcel-bundler": "^1.12.4",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "rollup": "^1.29.1",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0"
+    "react-dom": "^16.12.0"
   }
 }

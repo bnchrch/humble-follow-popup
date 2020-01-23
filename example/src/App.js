@@ -4,7 +4,7 @@ import withState from 'recompose/withState';
 import withProps from 'recompose/withProps';
 import Cookies from 'universal-cookie'
 
-import {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick, HumbleFollowTimer} from 'humble-follow-popup';
+import HumbleFollow from 'humble-follow-popup';
 const cookies = new Cookies()
 
 const MESSAGE_TEXT = `
@@ -67,7 +67,7 @@ const OpenOnTimePure = ({seconds, setSeconds}) => {
     <React.Fragment>
       <h2>Open after <input placeholder='4' onChange={(e) => setSeconds(e.target.value)}/> seconds </h2>
       {
-        seconds && <HumbleFollowTimer {...BASE_MODAL_PROPS} timedOpen={seconds * 1000}/>
+        seconds && <HumbleFollow {...BASE_MODAL_PROPS} type='timer' timedOpen={seconds * 1000}/>
       }
     </React.Fragment>
   )
@@ -88,7 +88,7 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
   return (
     <div style={pageStyle}>
       <Button onClick={openModal}>Open Modal with custom state</Button>
-      <HumbleFollowModal
+      <HumbleFollow
         {...BASE_MODAL_PROPS}
         closeModal={closeModal}
         openModal={openModal}
@@ -96,8 +96,9 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
       />
 
       <Button id='humbleButton'>Open Modal with managed state</Button>
-      <HumbleFollowClick
+      <HumbleFollow
         {...BASE_MODAL_PROPS}
+        type='button'
         buttonId='humbleButton'
       />
       <OpenOnTime/>
@@ -115,8 +116,9 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
         onClick={() => cookies.remove('HasSeenHumbleModal')}
       >
       Clear cookies</Button>
-      <HumbleFollowScroll
+      <HumbleFollow
         {...BASE_MODAL_PROPS}
+        type='scroll'
         scrollPerecentageTrigger={SCROLL_TRIGGER}
         debounce={200}
       />

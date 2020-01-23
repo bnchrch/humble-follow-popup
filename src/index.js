@@ -11,6 +11,8 @@ import compose from 'recompose/compose'
 import lifecycle from 'recompose/lifecycle'
 import withState from 'recompose/withState'
 import withProps from 'recompose/withProps'
+import branch from 'recompose/branch'
+import renderComponent from 'recompose/renderComponent'
 
 import Cookies from 'universal-cookie'
 import Markdown from 'markdown-to-jsx'
@@ -232,4 +234,13 @@ const HumbleFollowTimer = compose(
 // todo create a time based one
 // todo switch on options
 
+const branchOnType = (typeToFind, component) => branch(({type}) => type === typeToFind, renderComponent(component))
+
+const HumbleFollow = compose(
+  branchOnType('button', HumbleFollowClick),
+  branchOnType('scroll', HumbleFollowScroll),
+  branchOnType('timer', HumbleFollowTimer)
+)(HumbleFollowModal)
+
+export default HumbleFollow
 export {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick, HumbleFollowTimer}

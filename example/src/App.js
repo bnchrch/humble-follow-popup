@@ -4,7 +4,7 @@ import withState from 'recompose/withState';
 import withProps from 'recompose/withProps';
 import Cookies from 'universal-cookie'
 
-import {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick} from 'humble-follow-popup';
+import {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick, HumbleFollowTimer} from 'humble-follow-popup';
 const cookies = new Cookies()
 
 const MESSAGE_TEXT = `
@@ -62,6 +62,19 @@ const Button = ({children, ...props}) => {
   return (<button style={DEFAULT_BUTTON_STYLE} {...props}>{children}</button>)
 }
 
+const OpenOnTimePure = ({seconds, setSeconds}) => {
+  return (
+    <React.Fragment>
+      <h2>Open after <input placeholder='4' onChange={(e) => setSeconds(e.target.value)}/> seconds </h2>
+      {
+        seconds && <HumbleFollowTimer {...BASE_MODAL_PROPS} timedOpen={seconds * 1000}/>
+      }
+    </React.Fragment>
+  )
+}
+
+const OpenOnTime = withState('seconds', 'setSeconds', undefined)(OpenOnTimePure)
+
 const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
   const pageStyle = {
     height: '6000px',
@@ -83,11 +96,12 @@ const AppPure = ({modalIsOpen, closeModal, openModal, text}) => {
       />
 
       <Button id='humbleButton'>Open Modal with managed state</Button>
-
       <HumbleFollowClick
         {...BASE_MODAL_PROPS}
         buttonId='humbleButton'
       />
+      <OpenOnTime/>
+
 
       <h2>Or scroll {SCROLL_TRIGGER}% of the way 👇 the page to trigger the modal</h2>
       <div><i>Note: The modal will only open once, after that you must clear your 🍪's to see it again.</i></div>

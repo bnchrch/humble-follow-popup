@@ -219,7 +219,17 @@ const HumbleFollowClick = compose(
   })
 )(HumbleFollowModal)
 
+const HumbleFollowTimer = compose(
+  withModalState,
+  withCookieDisable,
+  lifecycle({
+    componentDidMount() {
+      setTimeout(this.props.openModal, this.props.timedOpen)
+    }
+  })
+)(HumbleFollowModal)
+
 // todo create a time based one
 // todo switch on options
 
-export {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick}
+export {HumbleFollowModal, HumbleFollowScroll, HumbleFollowClick, HumbleFollowTimer}

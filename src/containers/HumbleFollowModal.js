@@ -7,12 +7,6 @@ import CloseIcon from '../components/icons/CloseIcon'
 import Header from '../components/Header'
 import SocialMediaCTAs from '../components/SocialMediaCTAs'
 import Message from '../components/Message'
-/*
-TODO
-- ensure that the css is prefixed but not uniqified
-- remove css modules
-- find an auto css prefixer
-*/
 
 /*
   🖼 MODAL

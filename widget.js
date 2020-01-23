@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HumbleFollow from 'humble-follow-popup'
+import HumbleFollow from './dist/index'
 
 function initHumbleFollow (props) {
   const widgetElement = document.createElement('div')

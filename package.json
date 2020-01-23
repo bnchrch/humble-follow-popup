@@ -1,6 +1,6 @@
 {
   "name": "humble-follow-popup",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A popup to ask that users follow you",
   "author": "bechurch",
   "license": "GNU GPLv3",
@@ -17,7 +17,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "npm run build",
+    "build-widget": "parcel build widget.js",
+    "prepare": "npm run build && npm run build-widget",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },
@@ -54,7 +55,8 @@
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
-    "rollup-plugin-url": "^1.4.0"
+    "rollup-plugin-url": "^1.4.0",
+    "parcel-bundler": "^1.12.4"
   },
   "files": [
     "dist"
